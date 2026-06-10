@@ -29,6 +29,21 @@ app.MapGet("/usuarios/{id}", async (int id, AppDataContext db) =>
     return usuario is null ? Results.NotFound("Usuário não encontrado.") : Results.Ok(usuario);
 });
 
+app.MapGet("/usuarios/{id}/emprestimos", async (int id, AppDataContext db) =>
+{
+    var usuario = await db.Usuarios.FindAsync(id);
+    if (usuario is null)
+        return Results.NotFound("Usuário não encontrado.");
+
+    var emprestimos = await db.Emprestimos
+        .Include(e => e.Livro)
+        .Include(e => e.Usuario)
+        .Where(e => e.UsuarioId == id)
+        .ToListAsync();
+
+    return Results.Ok(emprestimos);
+});
+
 app.MapPost("/usuarios", async (Usuario usuario, AppDataContext db) =>
 {
     if (string.IsNullOrWhiteSpace(usuario.Nome))

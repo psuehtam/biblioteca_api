@@ -23,7 +23,7 @@ API REST de gerenciamento de biblioteca desenvolvida com ASP.NET Core Minimal AP
 1. Clone o repositório:
    ```
    git clone <url-do-repositorio>
-   cd biblioteca_tes2026_a2
+   cd biblioteca_api
    ```
 
 2. Execute a API (as migrations são aplicadas automaticamente na inicialização):
@@ -45,6 +45,7 @@ API REST de gerenciamento de biblioteca desenvolvida com ASP.NET Core Minimal AP
 |--------|------|-----------|
 | GET | `/usuarios` | Lista todos os usuários |
 | GET | `/usuarios/{id}` | Busca usuário por ID |
+| GET | `/usuarios/{id}/emprestimos` | Busca emprestimos do usuário |
 | POST | `/usuarios` | Cadastra novo usuário |
 | PUT | `/usuarios/{id}` | Atualiza dados do usuário |
 | DELETE | `/usuarios/{id}` | Remove usuário (bloqueia se tiver empréstimo ativo) |
